@@ -1,0 +1,52 @@
+<?php
+$data = file_get_contents("data-1.json");
+$inmuebles = json_decode($data);
+$filtroAply = (isset($_POST["fAply"]) && boolval($_POST["fAply"]));
+$filtroCiudad = isset($_POST["fCiudad"]);
+$filtroTipo = isset($_POST["fTipo"]);
+$filtroPrecioIni = $_POST["fPrecioIni"];
+$filtroPrecioFin = $_POST["fPrecioFin"];
+$matchCiudad = true;
+$matchTipo = true;
+$matchPrecio = true;
+try {
+  foreach($inmuebles as $key => $json) {
+    $precio = str_ireplace(["$",","], "", $json->Precio);
+    $precio = intval($precio);
+    $matchPrecio = ($precio >= intval($filtroPrecioIni) && $precio <= intval($filtroPrecioFin));
+    if($filtroAply){
+      $matchCiudad =  ($matchCiudad=="" || (!empty($filtroCiudad) && $json->Ciudad == $filtroCiudad));
+      $matchTipo = ($matchTipo=="" || (!empty($filtroTipo) && ($json->Tipo == $filtroTipo)));
+    }
+    //Sí Aplica filtro y no es coincidente continua el ciclo sin imprimir un elemento;
+    if($filtroAply && !($matchCiudad && $matchTipo && $matchPrecio)){
+      continue;
+    }
+?>
+ <div class="row">
+   <div class="col m12">
+      <div class="card horizontal itemMostrado">
+        <img src="img/home.jpg">
+        <div class="card-stacked">
+          <div class="card-content">
+            <?php
+              foreach($json as $keyProp => $prop){
+                $class = ($keyProp=="Precio") ? 'class="precioTexto"' : null;
+                if($keyProp=="Id"){ continue; }
+                echo "<p><strong>$keyProp:</strong> <span $class>$prop</span><p>";
+              }
+             ?>
+          </div>
+          <div class="card-action">
+            <a href="#" class="precioTexto">VER MÁS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
+<?php
+  }
+}catch (Exception $e) {
+  echo $e->getMessage();
+}
+?>

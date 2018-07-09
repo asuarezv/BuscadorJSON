@@ -49,7 +49,7 @@ function playVideoOnScroll(){
 }
 
 inicializarSlider();
-//playVideoOnScroll(); No se usa esta parte
+/* playVideoOnScroll(); */
 
 function AjaxReq(urlReq, dataSubmit, controlView="wraperInmuebles", load=true, callback){
     callback = callback || function(){};
@@ -66,7 +66,7 @@ function AjaxReq(urlReq, dataSubmit, controlView="wraperInmuebles", load=true, c
         callback(rsp, $control);
       })
       .fail(function( jqXHR, textStatus ) {
-        alert( "Request failed: " + textStatus );
+        alert( "Falla: " + textStatus );
       });
 }
 
