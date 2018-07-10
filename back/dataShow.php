@@ -14,11 +14,22 @@ try {
     $precio = str_ireplace(["$",","], "", $json->Precio);
     $precio = intval($precio);
     $matchPrecio = ($precio >= intval($filtroPrecioIni) && $precio <= intval($filtroPrecioFin));
+
     if($filtroAply){
-      $matchCiudad =  ($matchCiudad=="" || (!empty($filtroCiudad) && $json->Ciudad == $filtroCiudad));
-      $matchTipo = ($matchTipo=="" || (!empty($filtroTipo) && ($json->Tipo == $filtroTipo)));
+      if ($filtroCiudad=="" || boolval($json->Ciudad == $filtroCiudad)) {
+        $matchCiudad = true;
+      } else {
+        $matchCiudad = false;
+      }
+
+      if ($filtroTipo=="" || boolval($json->Tipo == $filtroTipo)) {
+        $matchTipo = true;
+      } else {
+        $matchTipo = false;
+      }
+
     }
-    //Sí Aplica filtro y no es coincidente continua el ciclo sin imprimir un elemento;
+
     if($filtroAply && !($matchCiudad && $matchTipo && $matchPrecio)){
       continue;
     }
