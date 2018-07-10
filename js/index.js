@@ -95,8 +95,8 @@ $(document).ready(()=> {
       let filtroPrecioIni = $("#rangoPrecio").val().split(";")[0];
       let filtroPrecioFin = $("#rangoPrecio").val().split(";")[1];
       AjaxReq("back/dataShow.php", {
-        fPrecioIni: filtroPrecioIni
-        ,fPrecioFin: filtroPrecioFin
+                                    fPrecioIni: 200
+                                   ,fPrecioFin: 80000
       });
     });
 

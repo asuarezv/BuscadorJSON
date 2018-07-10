@@ -2,10 +2,10 @@
 $data = file_get_contents("data-1.json");
 $inmuebles = json_decode($data);
 $filtroAply = (isset($_POST["fAply"]) && boolval($_POST["fAply"]));
-$filtroCiudad = isset($_POST["fCiudad"]);
-$filtroTipo = isset($_POST["fTipo"]);
-$filtroPrecioIni = $_POST["fPrecioIni"];
-$filtroPrecioFin = $_POST["fPrecioFin"];
+if (isset($_POST["fCiudad"]))    {$filtroCiudad =    $_POST["fCiudad"];}
+if (isset($_POST["fTipo"]))      {$filtroTipo =      $_POST["fTipo"];}
+if (isset($_POST["fPrecioIni"])) {$filtroPrecioIni = $_POST["fPrecioIni"];}
+if (isset($_POST["fPrecioFin"])) {$filtroPrecioFin = $_POST["fPrecioFin"];}
 $matchCiudad = true;
 $matchTipo = true;
 $matchPrecio = true;
