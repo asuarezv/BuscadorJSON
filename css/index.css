@@ -12,7 +12,7 @@ video#vidFondo {
 }
 
 .contenedor{
-  background-color: rgba(242, 242, 242, 0.5);
+  background-color: rgba(100, 100, 100, 0.5);
   width: 80%;
   margin: 50px auto;
   display: flex;
@@ -25,7 +25,7 @@ video#vidFondo {
 .rowTitulo{
   width: 100%;
   text-align: center;
-  background-color: #648C7D;
+  background-color: Teal;
   color: #F2F2F2;
   margin-top: 0;
   margin-bottom: 0;
@@ -88,7 +88,7 @@ video#vidFondo {
   text-align: center;
 }
 .botonField input{
-  color: #648C7D;
+  color: Teal;
 }
 .colContenido{
   width: 75%;
@@ -115,7 +115,7 @@ video#vidFondo {
 }
 
 .tituloContenido button{
-  background: #648C7D;
+  background: Teal;
   color: #F2F2F2;
   margin-top: 2rem;
   margin-right: 1rem;
@@ -135,7 +135,7 @@ video#vidFondo {
 }
 .precioTexto{
   font-size: 1.3rem;
-  color: #ffab40;
+  color: teal;
 }
 .card-stacked{
   width: 65%;

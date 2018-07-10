@@ -51,7 +51,8 @@ function playVideoOnScroll(){
 inicializarSlider();
 /* playVideoOnScroll(); */
 
-function AjaxReq(urlReq, dataSubmit, controlView="wraperInmuebles", load=true, callback){
+// Función que facilita el uso de Ajax
+function f_Ajax(urlReq, dataSubmit, controlView="resultados", load=true, callback){
     callback = callback || function(){};
     $.ajax({
       method: "POST"
@@ -73,17 +74,17 @@ function AjaxReq(urlReq, dataSubmit, controlView="wraperInmuebles", load=true, c
 $(document).ready(()=> {
 
     var insertOptions = function(rsp, control){ $(control).append(rsp).material_select(); };
-    AjaxReq("back/Ciudades_List.php", {}, "selectCiudad", false, insertOptions);
-    AjaxReq("back/tipos_List.php", {}, "selectTipo", false, insertOptions);
+    f_Ajax("datos/ciudades.php", {}, "selectCiudad", false, insertOptions);
+    f_Ajax("datos/tipos.php", {}, "selectTipo", false, insertOptions);
 
     $("#submitButton").click((event)=>{
       event.preventDefault();
       let filtroAply = true;
-      let filtroCiudad = $("#selectCiudad").val();
-      let filtroTipo = $("#selectTipo").val();
+      let filtroCiudad =    $("#selectCiudad").val();
+      let filtroTipo =      $("#selectTipo").val();
       let filtroPrecioIni = $("#rangoPrecio").val().split(";")[0];
       let filtroPrecioFin = $("#rangoPrecio").val().split(";")[1];
-      AjaxReq("back/dataShow.php", {fAply: filtroAply
+      f_Ajax("datos/resultados.php", {fAply: filtroAply
                                     ,fCiudad: filtroCiudad
                                     ,fTipo: filtroTipo
                                     ,fPrecioIni: filtroPrecioIni
@@ -94,9 +95,9 @@ $(document).ready(()=> {
     $("#mostrarTodos").click((event)=>{
       let filtroPrecioIni = $("#rangoPrecio").val().split(";")[0];
       let filtroPrecioFin = $("#rangoPrecio").val().split(";")[1];
-      AjaxReq("back/dataShow.php", {
-                                    fPrecioIni: 200
-                                   ,fPrecioFin: 80000
+      f_Ajax("datos/resultados.php", {
+                                    fPrecioIni: 200   // Límite inferior
+                                   ,fPrecioFin: 80000 // Límite superior
       });
     });
 
